@@ -1,0 +1,1654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Free study materials for West Bengal & CBSE students — notes, question papers, sample papers and more." />
+  <title>StudyHub — Free Study Materials</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ═══════════════════════════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════════════════════════ */
+    :root {
+      --bg:        #07070f;
+      --bg2:       #0e0e1a;
+      --bg3:       #151525;
+      --bg4:       #1c1c30;
+      --border:    rgba(255,255,255,0.06);
+      --border2:   rgba(255,255,255,0.11);
+      --border3:   rgba(255,255,255,0.17);
+      --a1:        #7c5cfc;
+      --a2:        #5b8af7;
+      --a3:        #a78bfa;
+      --a4:        #38bdf8;
+      --success:   #22c55e;
+      --error:     #ef4444;
+      --text:      #eeeef8;
+      --text2:     #8080a8;
+      --text3:     #404060;
+      --glass:     rgba(255,255,255,0.032);
+      --glassH:    rgba(255,255,255,0.065);
+      --glassB:    rgba(255,255,255,0.08);
+      --cardBg:    rgba(14,14,26,0.88);
+      --shadow:    0 4px 28px rgba(0,0,0,0.55);
+      --shadowLg:  0 20px 64px rgba(0,0,0,0.65);
+      --shadowGlow:0 0 0 1px rgba(124,92,252,0.18), 0 16px 48px rgba(124,92,252,0.18);
+      --glow:      0 0 60px rgba(124,92,252,0.14);
+      --r:         20px;
+      --rsm:       12px;
+      --rxs:       8px;
+      --font:      'Inter', system-ui, sans-serif;
+      --ease:      cubic-bezier(0.4,0,0.2,1);
+      --spring:    cubic-bezier(0.34,1.56,0.64,1);
+      --tr:        0.22s;
+      --navH:      68px;
+    }
+    [data-theme="light"] {
+      --bg:        #f0f2fa;
+      --bg2:       #ffffff;
+      --bg3:       #f5f6fd;
+      --bg4:       #eceef8;
+      --border:    rgba(0,0,0,0.055);
+      --border2:   rgba(0,0,0,0.1);
+      --border3:   rgba(0,0,0,0.16);
+      --text:      #0d0d20;
+      --text2:     #555570;
+      --text3:     #a0a0c0;
+      --glass:     rgba(255,255,255,0.72);
+      --glassH:    rgba(255,255,255,0.96);
+      --glassB:    rgba(0,0,0,0.065);
+      --cardBg:    rgba(255,255,255,0.95);
+      --shadow:    0 4px 24px rgba(80,80,180,0.09);
+      --shadowLg:  0 20px 56px rgba(80,80,180,0.14);
+      --shadowGlow:0 0 0 1px rgba(124,92,252,0.14), 0 16px 48px rgba(124,92,252,0.12);
+      --glow:      0 0 40px rgba(124,92,252,0.07);
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       RESET
+    ═══════════════════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      overflow-x: hidden;
+      line-height: 1.6;
+      transition: background 0.3s var(--ease), color 0.3s var(--ease);
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: linear-gradient(180deg, var(--a1), var(--a2)); border-radius: 99px; }
+
+    /* ═══════════════════════════════════════════════════════════
+       ANIMATED BACKGROUND BLOBS
+    ═══════════════════════════════════════════════════════════ */
+    .bg-blobs {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden;
+    }
+    .blob {
+      position: absolute; border-radius: 50%; filter: blur(120px);
+      animation: blobFloat 20s ease-in-out infinite;
+      will-change: transform;
+    }
+    .blob1 {
+      width: 600px; height: 600px;
+      background: rgba(124,92,252,0.07);
+      top: -200px; left: -100px;
+      animation-duration: 22s;
+    }
+    .blob2 {
+      width: 500px; height: 500px;
+      background: rgba(91,138,247,0.06);
+      top: 200px; right: -150px;
+      animation-duration: 18s; animation-delay: -8s;
+    }
+    .blob3 {
+      width: 400px; height: 400px;
+      background: rgba(56,189,248,0.05);
+      bottom: 100px; left: 30%;
+      animation-duration: 25s; animation-delay: -14s;
+    }
+    [data-theme="light"] .blob1 { background: rgba(124,92,252,0.05); }
+    [data-theme="light"] .blob2 { background: rgba(91,138,247,0.04); }
+    [data-theme="light"] .blob3 { background: rgba(56,189,248,0.04); }
+    @keyframes blobFloat {
+      0%,100% { transform: translate(0,0) scale(1); }
+      33%      { transform: translate(40px,-30px) scale(1.05); }
+      66%      { transform: translate(-30px,20px) scale(0.95); }
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       NAVBAR
+    ═══════════════════════════════════════════════════════════ */
+    .navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 300;
+      height: var(--navH);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 clamp(16px,4vw,48px);
+      background: rgba(7,7,15,0.75);
+      backdrop-filter: blur(32px) saturate(200%);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.3s var(--ease);
+    }
+    [data-theme="light"] .navbar { background: rgba(240,242,250,0.82); }
+    /* Gradient line under navbar */
+    .navbar::after {
+      content: "";
+      position: absolute; bottom: -1px; left: 0; right: 0; height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(124,92,252,0.4), rgba(91,138,247,0.4), transparent);
+      opacity: 0.6;
+    }
+
+    .nav-brand {
+      display: flex; align-items: center; gap: 11px;
+      text-decoration: none; color: var(--text); flex-shrink: 0;
+    }
+    .nav-logo {
+      width: 38px; height: 38px; border-radius: 11px;
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      box-shadow: 0 0 0 1px rgba(124,92,252,0.35), 0 4px 20px rgba(124,92,252,0.4);
+      position: relative; overflow: hidden;
+    }
+    .nav-logo::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.18), transparent);
+    }
+    .nav-title { font-size: 19px; font-weight: 800; letter-spacing: -0.4px; }
+    .nav-title .g {
+      background: linear-gradient(120deg, var(--a3), var(--a2), var(--a4));
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+
+    .nav-links { display: flex; gap: 2px; }
+    @media (max-width: 720px) { .nav-links { display: none; } }
+    .nav-link {
+      padding: 7px 14px; border-radius: 9px;
+      font-size: 13px; font-weight: 500; color: var(--text2);
+      background: none; border: none; cursor: pointer; font-family: var(--font);
+      transition: all var(--tr) var(--ease); position: relative;
+    }
+    .nav-link:hover {
+      background: var(--glassH); color: var(--text);
+    }
+
+    .nav-right { display: flex; align-items: center; gap: 8px; }
+    .icon-btn {
+      width: 38px; height: 38px; border-radius: 10px;
+      background: var(--glass); border: 1px solid var(--glassB);
+      color: var(--text2); cursor: pointer; font-size: 16px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--tr) var(--ease); flex-shrink: 0;
+    }
+    .icon-btn:hover { background: var(--a1); color: #fff; border-color: var(--a1); box-shadow: 0 0 20px rgba(124,92,252,0.4); }
+
+    /* ═══════════════════════════════════════════════════════════
+       HERO
+    ═══════════════════════════════════════════════════════════ */
+    .hero {
+      position: relative; z-index: 1;
+      padding: calc(var(--navH) + 64px) clamp(16px,6vw,80px) 52px;
+      text-align: center; overflow: hidden;
+    }
+    .hero-ring {
+      position: absolute; width: 800px; height: 800px; border-radius: 50%;
+      border: 1px solid rgba(124,92,252,0.06);
+      top: 50%; left: 50%; transform: translate(-50%,-60%);
+      pointer-events: none;
+      animation: ringPulse 6s ease-in-out infinite;
+    }
+    .hero-ring2 {
+      width: 1100px; height: 1100px;
+      border-color: rgba(91,138,247,0.04);
+      animation-delay: -3s; animation-duration: 9s;
+    }
+    @keyframes ringPulse { 0%,100% { opacity:1; } 50% { opacity:0.4; } }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: rgba(124,92,252,0.1);
+      border: 1px solid rgba(124,92,252,0.22);
+      color: var(--a3); padding: 6px 16px; border-radius: 99px;
+      font-size: 11px; font-weight: 700; letter-spacing: 0.8px; text-transform: uppercase;
+      margin-bottom: 22px;
+      animation: fadeUp 0.6s var(--ease) both;
+    }
+    .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--a3); animation: dotBlink 2s ease infinite; }
+    @keyframes dotBlink { 0%,100% { opacity:1; } 50% { opacity:0.3; } }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 66px); font-weight: 900;
+      letter-spacing: -2px; line-height: 1.06; margin-bottom: 18px;
+      animation: fadeUp 0.6s 0.1s var(--ease) both;
+    }
+    .hero h1 .g {
+      background: linear-gradient(120deg, var(--a3) 0%, var(--a2) 50%, var(--a4) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+      background-size: 200% auto;
+      animation: gradShift 4s linear infinite;
+    }
+    @keyframes gradShift { 0% { background-position:0% center; } 100% { background-position:200% center; } }
+    @keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+    .hero p {
+      font-size: clamp(14px, 2vw, 18px); color: var(--text2);
+      max-width: 500px; margin: 0 auto;
+      animation: fadeUp 0.6s 0.2s var(--ease) both;
+    }
+
+    /* Stats strip */
+    .hero-stats {
+      display: flex; align-items: center; justify-content: center; gap: 32px;
+      margin-top: 36px; flex-wrap: wrap;
+      animation: fadeUp 0.6s 0.3s var(--ease) both;
+    }
+    .hs { text-align: center; }
+    .hs-val { font-size: 22px; font-weight: 900; background: linear-gradient(135deg, var(--a1), var(--a2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .hs-lbl { font-size: 11px; color: var(--text3); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 2px; }
+    .hs-div { width: 1px; height: 36px; background: var(--border2); }
+
+    /* ═══════════════════════════════════════════════════════════
+       FILTER BAR — PREMIUM GLASS STICKY
+    ═══════════════════════════════════════════════════════════ */
+    .filter-bar {
+      position: sticky; top: var(--navH); z-index: 200;
+      background: rgba(7,7,15,0.82);
+      backdrop-filter: blur(28px) saturate(180%);
+      border-bottom: 1px solid var(--border);
+      padding: 14px clamp(16px,4vw,48px);
+      transition: background 0.3s var(--ease);
+    }
+    [data-theme="light"] .filter-bar { background: rgba(240,242,250,0.88); }
+
+    .filter-row1 { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+
+    /* Search */
+    .fb-search { position: relative; flex: 1; min-width: 200px; }
+    .fb-search input {
+      width: 100%; padding: 10px 38px 10px 40px;
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: var(--rsm); color: var(--text);
+      font-family: var(--font); font-size: 13.5px; outline: none;
+      transition: border var(--tr) var(--ease), box-shadow var(--tr) var(--ease), background var(--tr) var(--ease);
+    }
+    .fb-search input:focus {
+      border-color: var(--a1); background: var(--bg4);
+      box-shadow: 0 0 0 3px rgba(124,92,252,0.15), var(--glow);
+    }
+    .fb-search input::placeholder { color: var(--text3); }
+    .fb-si { position:absolute; left:13px; top:50%; transform:translateY(-50%); color:var(--text3); font-size:15px; pointer-events:none; }
+    .fb-sc {
+      position:absolute; right:12px; top:50%; transform:translateY(-50%);
+      color:var(--text3); cursor:pointer; background:none; border:none;
+      padding:4px; border-radius:50%; display:none; font-size:12px;
+      transition: all var(--tr) var(--ease);
+    }
+    .fb-sc:hover { color: var(--error); background: rgba(239,68,68,0.1); }
+
+    /* Select wrappers */
+    .fb-select {
+      display: flex; align-items: center; gap: 7px;
+      background: var(--bg3); border: 1px solid var(--border2);
+      border-radius: var(--rsm); padding: 0 12px; height: 42px;
+      transition: border var(--tr) var(--ease), box-shadow var(--tr) var(--ease), background var(--tr) var(--ease);
+      cursor: pointer; white-space: nowrap;
+    }
+    .fb-select:focus-within {
+      border-color: var(--a1); background: var(--bg4);
+      box-shadow: 0 0 0 3px rgba(124,92,252,0.15);
+    }
+    .fb-select.active-filter {
+      border-color: rgba(124,92,252,0.45);
+      background: rgba(124,92,252,0.09);
+      box-shadow: 0 0 0 1px rgba(124,92,252,0.15);
+    }
+    .sel-lbl { font-size: 10.5px; font-weight: 700; color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px; }
+    .fb-select select {
+      background: none; border: none; color: var(--text);
+      font-family: var(--font); font-size: 13px; font-weight: 500;
+      outline: none; cursor: pointer; appearance: none; -webkit-appearance: none;
+      min-width: 72px;
+    }
+    .fb-select.active-filter select { color: var(--a3); font-weight: 700; }
+    .fb-select select option { background: var(--bg2); color: var(--text); }
+    .sel-arr { font-size: 9px; color: var(--text3); pointer-events: none; }
+
+    /* Reset btn */
+    .fb-reset {
+      height: 42px; padding: 0 16px; border-radius: var(--rsm);
+      background: rgba(239,68,68,0.07); border: 1px solid rgba(239,68,68,0.18);
+      color: var(--error); font-family: var(--font); font-size: 12px; font-weight: 700;
+      cursor: pointer; white-space: nowrap; display: none;
+      align-items: center; gap: 5px; transition: all var(--tr) var(--ease);
+    }
+    .fb-reset:hover { background: var(--error); color: #fff; box-shadow: 0 4px 20px rgba(239,68,68,0.35); }
+    .fb-reset.visible { display: flex; }
+
+    /* Row 2 — chips */
+    .filter-row2 {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      margin-top: 10px; transition: margin var(--tr) var(--ease);
+    }
+    .filter-row2.empty { margin-top: 0; }
+
+    .active-chip {
+      display: inline-flex; align-items: center; gap: 5px;
+      padding: 4px 10px; border-radius: 99px;
+      background: rgba(124,92,252,0.12); border: 1px solid rgba(124,92,252,0.3);
+      color: var(--a3); font-size: 11.5px; font-weight: 700;
+      animation: chipIn 0.18s var(--spring) both;
+    }
+    .active-chip button { background:none; border:none; color:var(--a3); cursor:pointer; font-size:11px; padding:0; opacity:0.6; transition:opacity var(--tr); }
+    .active-chip button:hover { opacity:1; }
+    @keyframes chipIn { from { opacity:0; transform:scale(0.82); } to { opacity:1; transform:scale(1); } }
+
+    .result-info { margin-left: auto; font-size: 12.5px; color: var(--text3); flex-shrink: 0; }
+    .result-info strong { color: var(--text); font-weight: 800; }
+
+    /* ═══════════════════════════════════════════════════════════
+       CONTENT
+    ═══════════════════════════════════════════════════════════ */
+    .content {
+      max-width: 1240px; margin: 0 auto;
+      padding: 32px clamp(16px,4vw,48px) 130px;
+      position: relative; z-index: 1;
+    }
+
+    /* ═══════════════════════════════════════════════════════════
+       CARDS GRID
+    ═══════════════════════════════════════════════════════════ */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(min(300px, 100%), 1fr));
+      gap: 22px;
+    }
+
+    /* Card */
+    .material-card {
+      background: var(--cardBg);
+      border: 1px solid var(--border);
+      border-radius: var(--r);
+      overflow: hidden;
+      transition:
+        transform var(--tr) var(--ease),
+        border-color var(--tr) var(--ease),
+        box-shadow var(--tr) var(--ease);
+      backdrop-filter: blur(16px);
+      will-change: transform;
+      position: relative;
+    }
+    .material-card::before {
+      content: ""; position: absolute; inset: 0; border-radius: inherit;
+      background: linear-gradient(135deg, rgba(255,255,255,0.028) 0%, transparent 60%);
+      pointer-events: none; z-index: 1;
+    }
+    .material-card.card-enter {
+      animation: cardIn 0.42s var(--spring) both;
+    }
+    .material-card:hover {
+      transform: translateY(-6px) scale(1.012);
+      border-color: rgba(124,92,252,0.28);
+      box-shadow: var(--shadowGlow);
+    }
+    @keyframes cardIn {
+      from { opacity:0; transform:translateY(22px) scale(0.96); }
+      to   { opacity:1; transform:translateY(0) scale(1); }
+    }
+
+    /* Card thumbnail */
+    .card-thumb {
+      width: 100%; height: 160px; overflow: hidden;
+      position: relative; background: var(--bg3);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .card-thumb img {
+      width: 100%; height: 100%; object-fit: cover;
+      opacity: 0; transition: opacity 0.4s var(--ease), transform 0.5s var(--ease);
+    }
+    .card-thumb img.loaded { opacity: 1; }
+    .material-card:hover .card-thumb img { transform: scale(1.06); }
+
+    /* Placeholder thumb */
+    .thumb-ph {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px;
+    }
+    .thumb-ph-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, var(--bg3) 0%, var(--bg4) 100%);
+    }
+    .thumb-ph-grid {
+      position: absolute; inset: 0; opacity: 0.4;
+      background-image:
+        linear-gradient(rgba(124,92,252,0.08) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,92,252,0.08) 1px, transparent 1px);
+      background-size: 24px 24px;
+    }
+    .thumb-ph-icon {
+      position: relative; z-index: 1;
+      width: 56px; height: 56px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(124,92,252,0.14); border: 1px solid rgba(124,92,252,0.22);
+      font-size: 26px;
+      box-shadow: 0 0 30px rgba(124,92,252,0.2);
+    }
+    .thumb-ph-label {
+      position: relative; z-index: 1;
+      font-size: 10px; font-weight: 700; color: var(--text3);
+      text-transform: uppercase; letter-spacing: 0.8px;
+    }
+    /* Category color accent stripe */
+    .thumb-stripe {
+      position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--a1), var(--a2));
+      z-index: 2;
+    }
+
+    /* Card gradient overlay */
+    .card-overlay {
+      position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(to bottom, transparent 30%, rgba(7,7,15,0.72) 100%);
+      pointer-events: none;
+    }
+    [data-theme="light"] .card-overlay { background: linear-gradient(to bottom, transparent 40%, rgba(0,0,20,0.22) 100%); }
+
+    /* Card body */
+    .card-body { padding: 16px 18px 18px; position: relative; z-index: 2; }
+    .card-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 10px; }
+    .badge {
+      display: inline-flex; align-items: center;
+      padding: 3px 9px; border-radius: 99px;
+      font-size: 10px; font-weight: 800; letter-spacing: 0.3px;
+    }
+    .badge-cat   { background: rgba(124,92,252,0.14); color: var(--a3); border: 1px solid rgba(124,92,252,0.22); }
+    .badge-class { background: rgba(91,138,247,0.12);  color: var(--a2); border: 1px solid rgba(91,138,247,0.22); }
+    .badge-sub   { background: rgba(34,197,94,0.1);    color: var(--success); border: 1px solid rgba(34,197,94,0.2); }
+
+    .card-title {
+      font-size: 14px; font-weight: 700; line-height: 1.45; margin-bottom: 16px;
+      color: var(--text);
+      display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
+    }
+    .card-footer { display: flex; gap: 8px; }
+
+    /* ═══════════════════════════════════════════════════════════
+       BUTTONS
+    ═══════════════════════════════════════════════════════════ */
+    .btn {
+      position: relative; overflow: hidden;
+      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+      padding: 10px 16px; border-radius: var(--rxs);
+      font-family: var(--font); font-size: 12.5px; font-weight: 700;
+      cursor: pointer; border: none; transition: all var(--tr) var(--ease);
+      text-decoration: none; flex: 1; white-space: nowrap; letter-spacing: 0.1px;
+    }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      color: #fff;
+    }
+    .btn-primary::before {
+      content: ""; position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0; transition: opacity var(--tr) var(--ease);
+    }
+    .btn-primary:hover::before { opacity: 1; }
+    .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 8px 28px rgba(124,92,252,0.45); }
+    .btn-primary:active { transform: scale(0.97); }
+    .btn-ghost {
+      background: var(--glass); border: 1px solid var(--glassB);
+      color: var(--text2); flex: 0;
+    }
+    .btn-ghost:hover { background: var(--glassH); color: var(--text); border-color: var(--border3); }
+
+    /* Ripple */
+    .ripple {
+      position: absolute; border-radius: 50%;
+      background: rgba(255,255,255,0.22);
+      transform: scale(0); animation: rippleAnim 0.55s linear;
+      pointer-events: none;
+    }
+    @keyframes rippleAnim { to { transform:scale(4); opacity:0; } }
+
+    /* ═══════════════════════════════════════════════════════════
+       SKELETON
+    ═══════════════════════════════════════════════════════════ */
+    #skeletonGrid { display: contents; }
+    .skeleton-card {
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: var(--r); overflow: hidden;
+    }
+    .sk {
+      background: linear-gradient(90deg, var(--bg2) 25%, var(--bg3) 50%, var(--bg2) 75%);
+      background-size: 200% 100%; animation: shimmer 1.6s ease infinite;
+      border-radius: 6px;
+    }
+    @keyframes shimmer { 0% { background-position:200% 0; } 100% { background-position:-200% 0; } }
+    .sk-thumb { width:100%; height:160px; border-radius:0; }
+    .sk-body { padding:16px 18px; display:flex; flex-direction:column; gap:10px; }
+    .sk-line { height:10px; } .sk-line.s { width:50%; } .sk-line.m { width:72%; }
+    .sk-title { height:13px; margin-bottom:4px; } .sk-btn { height:38px; border-radius:8px; }
+
+    /* ═══════════════════════════════════════════════════════════
+       EMPTY STATE
+    ═══════════════════════════════════════════════════════════ */
+    .empty-state {
+      grid-column: 1/-1;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 80px 20px; text-align: center;
+    }
+    .empty-bowl {
+      width: 100px; height: 100px; border-radius: 28px;
+      background: var(--bg3); border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 44px; margin-bottom: 24px;
+      box-shadow: 0 0 40px rgba(124,92,252,0.08);
+    }
+    .empty-state h3 { font-size: 20px; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+    .empty-state p  { font-size: 14px; color: var(--text2); max-width: 280px; line-height: 1.7; }
+
+    /* ═══════════════════════════════════════════════════════════
+       PDF MODAL — CINEMATIC FULLSCREEN
+    ═══════════════════════════════════════════════════════════ */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 500;
+      background: rgba(0,0,0,0); backdrop-filter: blur(0px);
+      display: flex; align-items: center; justify-content: center;
+      padding: 16px;
+      pointer-events: none;
+      transition: background 0.28s var(--ease), backdrop-filter 0.28s var(--ease);
+    }
+    .modal-overlay.open {
+      background: rgba(0,0,8,0.86);
+      backdrop-filter: blur(20px) saturate(120%);
+      pointer-events: all;
+    }
+
+    /* PDF modal — near fullscreen feel */
+    .pdf-modal {
+      background: var(--bg2); width: 100%; max-width: 1000px;
+      height: min(90vh, 780px);
+      display: flex; flex-direction: column;
+      border-radius: var(--r); overflow: hidden;
+      border: 1px solid var(--border2);
+      transform: scale(0.9) translateY(30px);
+      opacity: 0;
+      transition: transform 0.32s var(--spring), opacity 0.28s var(--ease);
+      box-shadow: 0 32px 96px rgba(0,0,0,0.7), 0 0 0 1px rgba(124,92,252,0.1);
+      position: relative;
+    }
+    .modal-overlay.open .pdf-modal { transform: scale(1) translateY(0); opacity: 1; }
+    /* Accent top strip on PDF modal */
+    .pdf-modal::before {
+      content: ""; display: block; height: 3px; flex-shrink: 0;
+      background: linear-gradient(90deg, var(--a1), var(--a2), var(--a4));
+    }
+
+    /* PDF Header */
+    .pdf-header {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 20px; border-bottom: 1px solid var(--border); flex-shrink: 0;
+      background: rgba(7,7,15,0.6);
+    }
+    [data-theme="light"] .pdf-header { background: rgba(240,242,250,0.7); }
+    .pdf-header-left { display:flex; flex-direction:column; gap:3px; overflow:hidden; min-width:0; }
+    .pdf-modal-title {
+      font-size: 14px; font-weight: 800;
+      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    }
+    .pdf-modal-sub { font-size: 11.5px; color: var(--text3); display: flex; align-items: center; gap: 6px; }
+    .pdf-live-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--success); animation: dotBlink 2s ease infinite; flex-shrink: 0; }
+    .pdf-header-actions { display: flex; gap: 8px; flex-shrink: 0; margin-left: 16px; align-items: center; }
+
+    .pdf-action-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 8px;
+      background: var(--glass); border: 1px solid var(--glassB);
+      color: var(--text2); font-size: 12px; font-weight: 600;
+      text-decoration: none; transition: all var(--tr) var(--ease);
+      font-family: var(--font); cursor: pointer;
+    }
+    .pdf-action-btn:hover { background: var(--glassH); color: var(--text); border-color: var(--border3); }
+
+    .pdf-close-btn {
+      width: 36px; height: 36px; border-radius: 9px;
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.18);
+      color: var(--error); cursor: pointer; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--tr) var(--ease);
+    }
+    .pdf-close-btn:hover { background: var(--error); color: #fff; box-shadow: 0 4px 20px rgba(239,68,68,0.4); }
+
+    /* PDF progress bar */
+    .pdf-progress {
+      height: 2px; background: var(--border); flex-shrink: 0;
+      position: relative; overflow: hidden;
+    }
+    .pdf-progress-bar {
+      position: absolute; inset: 0; left: -100%;
+      background: linear-gradient(90deg, var(--a1), var(--a2), var(--a4));
+      animation: progressSweep 1.5s ease-in-out infinite;
+    }
+    .pdf-progress.done .pdf-progress-bar { display: none; }
+    @keyframes progressSweep { 0% { left:-100%; } 100% { left:100%; } }
+
+    /* iframe wrap */
+    .pdf-iframe-wrap { flex: 1; position: relative; background: #1a1a2e; }
+    [data-theme="light"] .pdf-iframe-wrap { background: #e8e8f4; }
+    .pdf-iframe-wrap iframe { width: 100%; height: 100%; border: none; }
+
+    /* Loading overlay inside iframe */
+    .pdf-loader {
+      position: absolute; inset: 0; z-index: 5;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px;
+      background: var(--bg2);
+      transition: opacity 0.3s var(--ease);
+    }
+    .pdf-loader.hidden { opacity: 0; pointer-events: none; }
+    .pdf-spinner-ring {
+      width: 52px; height: 52px; border-radius: 50%;
+      border: 3px solid var(--border2);
+      border-top-color: var(--a1); border-right-color: var(--a2);
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .pdf-loader-text { font-size: 13px; color: var(--text2); font-weight: 500; }
+    .pdf-loader-sub  { font-size: 11.5px; color: var(--text3); margin-top: -12px; }
+
+    /* ═══════════════════════════════════════════════════════════
+       INFO MODALS (About / Privacy)
+    ═══════════════════════════════════════════════════════════ */
+    .info-modal {
+      background: var(--bg2); border: 1px solid var(--border2);
+      border-radius: var(--r); width: 100%; max-width: 520px;
+      max-height: 82vh; display: flex; flex-direction: column;
+      transform: scale(0.88) translateY(24px); opacity: 0;
+      transition: transform 0.3s var(--spring), opacity 0.25s var(--ease);
+      box-shadow: var(--shadowLg);
+      position: relative; overflow: hidden;
+    }
+    .info-modal::before {
+      content: ""; display: block; height: 3px; flex-shrink: 0;
+      background: linear-gradient(90deg, var(--a1), var(--a2), var(--a4));
+    }
+    .modal-overlay.open .info-modal { transform: scale(1) translateY(0); opacity: 1; }
+
+    .info-header {
+      padding: 20px 24px 16px; border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between; flex-shrink: 0;
+    }
+    .info-header h2 { font-size: 17px; font-weight: 900; display: flex; align-items: center; gap: 9px; }
+    .info-body { padding: 22px 24px; overflow-y: auto; }
+    .info-body p { font-size: 14px; color: var(--text2); line-height: 1.82; }
+    .info-body p + p { margin-top: 14px; }
+    .info-footer { padding: 16px 24px; border-top: 1px solid var(--border); flex-shrink: 0; }
+
+    /* Close btn (shared) */
+    .close-btn {
+      width: 34px; height: 34px; border-radius: 8px;
+      background: rgba(239,68,68,0.08); border: 1px solid rgba(239,68,68,0.18);
+      color: var(--error); cursor: pointer; font-size: 14px;
+      display: flex; align-items: center; justify-content: center;
+      transition: all var(--tr) var(--ease);
+    }
+    .close-btn:hover { background: var(--error); color: #fff; box-shadow: 0 4px 16px rgba(239,68,68,0.35); }
+
+    /* ═══════════════════════════════════════════════════════════
+       TOAST
+    ═══════════════════════════════════════════════════════════ */
+    .toast-container {
+      position: fixed; bottom: 82px; right: 18px;
+      display: flex; flex-direction: column; gap: 8px;
+      z-index: 9999; pointer-events: none;
+    }
+    @media (min-width: 600px) { .toast-container { bottom: 24px; } }
+    .toast {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 16px; border-radius: var(--rsm);
+      font-size: 13px; font-weight: 600; color: #fff;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.4);
+      pointer-events: auto; min-width: 220px; max-width: 320px;
+      animation: toastIn 0.3s var(--ease);
+      backdrop-filter: blur(16px);
+    }
+    .toast.success { background: rgba(34,197,94,0.94); }
+    .toast.error   { background: rgba(239,68,68,0.94); }
+    .toast.info    { background: rgba(124,92,252,0.94); }
+    .toast.fade-out { animation: toastOut 0.28s var(--ease) forwards; }
+    @keyframes toastIn  { from { transform:translateX(110%); opacity:0; } to { transform:translateX(0); opacity:1; } }
+    @keyframes toastOut { to   { transform:translateX(110%); opacity:0; } }
+
+    /* ═══════════════════════════════════════════════════════════
+       MOBILE BOTTOM NAV
+    ═══════════════════════════════════════════════════════════ */
+    .bottom-nav {
+      display: none; position: fixed; bottom: 0; left: 0; right: 0; z-index: 150;
+      background: rgba(7,7,15,0.95); backdrop-filter: blur(28px);
+      border-top: 1px solid var(--border);
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+    [data-theme="light"] .bottom-nav { background: rgba(240,242,250,0.95); }
+    @media (max-width: 640px) { .bottom-nav { display: block; } }
+    .bottom-nav-inner { display: flex; }
+    .bn-item {
+      flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 3px; padding: 10px 4px; cursor: pointer; font-family: var(--font);
+      background: none; border: none; color: var(--text3);
+      transition: color var(--tr) var(--ease); font-size: 10.5px; font-weight: 600;
+    }
+    .bn-item .bni { font-size: 18px; }
+    .bn-item:hover, .bn-item.active { color: var(--a1); }
+
+    /* FAB */
+    .fab {
+      position: fixed; bottom: 72px; right: 18px; z-index: 140;
+      width: 50px; height: 50px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--a1), var(--a2));
+      border: none; cursor: pointer; font-size: 20px;
+      display: none; align-items: center; justify-content: center;
+      box-shadow: 0 6px 28px rgba(124,92,252,0.5);
+      transition: transform var(--tr) var(--ease), box-shadow var(--tr) var(--ease);
+      color: #fff; position: fixed;
+    }
+    .fab:hover { transform: scale(1.1); box-shadow: 0 8px 36px rgba(124,92,252,0.6); }
+    @media (max-width: 640px) { .fab { display: flex; } }
+
+    /* ═══════════════════════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════════════════════ */
+    .footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      padding: 48px clamp(16px,5vw,64px); text-align: center;
+      position: relative; z-index: 1;
+    }
+    .footer-logo { font-size: 22px; font-weight: 900; margin-bottom: 8px; }
+    .footer-logo .g { background: linear-gradient(120deg, var(--a3), var(--a2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .footer-desc { font-size: 13px; color: var(--text3); margin-bottom: 24px; max-width: 340px; margin-left: auto; margin-right: auto; }
+    .footer-links { display: flex; gap: 6px; justify-content: center; flex-wrap: wrap; margin-bottom: 24px; }
+    .footer-link {
+      padding: 7px 16px; border-radius: 9px; font-size: 13px; font-weight: 600;
+      color: var(--text2); background: none; border: none; cursor: pointer;
+      font-family: var(--font); transition: all var(--tr) var(--ease);
+    }
+    .footer-link:hover { color: var(--a1); background: var(--glassH); }
+    .footer-copy { font-size: 12px; color: var(--text3); }
+    .footer-copy a { color: var(--a3); text-decoration: none; }
+
+    /* ═══════════════════════════════════════════════════════════
+       MOBILE / A11Y
+    ═══════════════════════════════════════════════════════════ */
+    @media (max-width: 640px) {
+      .content { padding-bottom: 100px; }
+      .footer  { padding-bottom: 90px; }
+      .pdf-modal { border-radius: var(--rsm); height: 92vh; max-height: 92vh; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body data-theme="dark">
+
+<!-- Animated background blobs -->
+<div class="bg-blobs" aria-hidden="true">
+  <div class="blob blob1"></div>
+  <div class="blob blob2"></div>
+  <div class="blob blob3"></div>
+</div>
+
+<!-- ══════════════ NAVBAR ══════════════ -->
+<nav class="navbar">
+  <a class="nav-brand" href="#">
+    <div class="nav-logo">📚</div>
+    <div class="nav-title">Study<span class="g">Hub</span></div>
+  </a>
+  <div class="nav-links">
+    <button class="nav-link" onclick="document.getElementById('filterBar').scrollIntoView({behavior:'smooth'})">Browse</button>
+    <button class="nav-link" id="navAbout">About Us</button>
+    <button class="nav-link" id="navPrivacy">Privacy</button>
+    <button class="nav-link" onclick="openContact()">Contact</button>
+  </div>
+  <div class="nav-right">
+    <button class="icon-btn" id="themeBtn" title="Toggle theme" aria-label="Toggle theme">🌙</button>
+    <button class="icon-btn" id="navRefresh" title="Refresh" aria-label="Refresh">⚡</button>
+  </div>
+</nav>
+
+<!-- ══════════════ HERO ══════════════ -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-ring" aria-hidden="true"></div>
+  <div class="hero-ring hero-ring2" aria-hidden="true"></div>
+
+  <div class="hero-badge">
+    <span class="dot"></span>
+    West Bengal &amp; CBSE
+  </div>
+
+  <h1>Learn Smarter,<br><span class="g">Study Better</span></h1>
+
+  <p>Free notes, question papers, sample papers &amp; guides —<br>organized by class and subject.</p>
+
+  <div class="hero-stats">
+    <div class="hs">
+      <div class="hs-val" id="statTotal">—</div>
+      <div class="hs-lbl">Materials</div>
+    </div>
+    <div class="hs-div"></div>
+    <div class="hs">
+      <div class="hs-val" id="statSubjects">—</div>
+      <div class="hs-lbl">Subjects</div>
+    </div>
+    <div class="hs-div"></div>
+    <div class="hs">
+      <div class="hs-val" id="statClasses">—</div>
+      <div class="hs-lbl">Classes</div>
+    </div>
+    <div class="hs-div"></div>
+    <div class="hs">
+      <div class="hs-val" id="statCats">—</div>
+      <div class="hs-lbl">Categories</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ FILTER BAR ══════════════ -->
+<div class="filter-bar" id="filterBar" role="search" aria-label="Filter materials">
+  <div class="filter-row1">
+    <div class="fb-search">
+      <span class="fb-si" aria-hidden="true">🔍</span>
+      <input type="text" id="searchInput" placeholder="Search title, subject, class…" autocomplete="off" aria-label="Search materials" />
+      <button class="fb-sc" id="searchClear" title="Clear search" aria-label="Clear search">✕</button>
+    </div>
+
+    <div class="fb-select" id="wrapCat">
+      <span class="sel-lbl">Category</span>
+      <select id="selCat" aria-label="Filter by category">
+        <option value="">All</option>
+        <option value="Notes">Notes</option>
+        <option value="Question Paper">Question Paper</option>
+        <option value="Sample Paper">Sample Paper</option>
+        <option value="Worksheet">Worksheet</option>
+        <option value="Textbook">Textbook</option>
+        <option value="Guide">Guide</option>
+        <option value="MCQ">MCQ</option>
+        <option value="Other">Other</option>
+      </select>
+      <span class="sel-arr" aria-hidden="true">▾</span>
+    </div>
+
+    <div class="fb-select" id="wrapClass">
+      <span class="sel-lbl">Class</span>
+      <select id="selClass" aria-label="Filter by class">
+        <option value="">All</option>
+        <option value="Class 1">1</option>
+        <option value="Class 2">2</option>
+        <option value="Class 3">3</option>
+        <option value="Class 4">4</option>
+        <option value="Class 5">5</option>
+        <option value="Class 6">6</option>
+        <option value="Class 7">7</option>
+        <option value="Class 8">8</option>
+        <option value="Class 9">9</option>
+        <option value="Class 10">10</option>
+        <option value="Class 11">11</option>
+        <option value="Class 12">12</option>
+      </select>
+      <span class="sel-arr" aria-hidden="true">▾</span>
+    </div>
+
+    <div class="fb-select" id="wrapSub">
+      <span class="sel-lbl">Subject</span>
+      <select id="selSub" aria-label="Filter by subject">
+        <option value="">All</option>
+      </select>
+      <span class="sel-arr" aria-hidden="true">▾</span>
+    </div>
+
+    <button class="fb-reset" id="resetFilters" aria-label="Reset all filters">✕ Reset</button>
+  </div>
+
+  <div class="filter-row2 empty" id="filterRow2" aria-live="polite">
+    <div class="result-info" id="resultInfo"></div>
+  </div>
+</div>
+
+<!-- ══════════════ CONTENT ══════════════ -->
+<main class="content" id="materialsSection">
+  <div class="grid-wrap" id="gridWrap">
+    <div class="cards-grid" id="cardsGrid" role="list" aria-label="Study materials">
+      <div id="skeletonGrid">
+        <div class="skeleton-card"><div class="sk sk-thumb"></div><div class="sk-body"><div class="sk sk-line s"></div><div class="sk sk-line m"></div><div class="sk sk-title"></div><div class="sk sk-btn"></div></div></div>
+        <div class="skeleton-card"><div class="sk sk-thumb"></div><div class="sk-body"><div class="sk sk-line s"></div><div class="sk sk-line m"></div><div class="sk sk-title"></div><div class="sk sk-btn"></div></div></div>
+        <div class="skeleton-card"><div class="sk sk-thumb"></div><div class="sk-body"><div class="sk sk-line s"></div><div class="sk sk-line m"></div><div class="sk sk-title"></div><div class="sk sk-btn"></div></div></div>
+        <div class="skeleton-card"><div class="sk sk-thumb"></div><div class="sk-body"><div class="sk sk-line s"></div><div class="sk sk-line m"></div><div class="sk sk-title"></div><div class="sk sk-btn"></div></div></div>
+        <div class="skeleton-card"><div class="sk sk-thumb"></div><div class="sk-body"><div class="sk sk-line s"></div><div class="sk sk-line m"></div><div class="sk sk-title"></div><div class="sk sk-btn"></div></div></div>
+        <div class="skeleton-card"><div class="sk sk-thumb"></div><div class="sk-body"><div class="sk sk-line s"></div><div class="sk sk-line m"></div><div class="sk sk-title"></div><div class="sk sk-btn"></div></div></div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<!-- ══════════════ FOOTER ══════════════ -->
+<footer class="footer">
+  <div class="footer-logo">Study<span class="g">Hub</span></div>
+  <div class="footer-desc">Free study materials for West Bengal &amp; CBSE students. Learn smarter, not harder.</div>
+  <div class="footer-links">
+    <button class="footer-link" id="footerAbout">About Us</button>
+    <button class="footer-link" id="footerPrivacy">Privacy Policy</button>
+    <button class="footer-link" onclick="openContact()">Contact</button>
+  </div>
+  <div class="footer-copy">&copy; 2026 StudyHub &nbsp;·&nbsp; Built with ❤️ for students <h4>by Soumadeep kkhs</h4></div>
+</footer>
+
+<!-- FAB -->
+<button class="fab" onclick="document.getElementById('filterBar').scrollIntoView({behavior:'smooth'})" title="Browse Materials" aria-label="Browse materials">📖</button>
+
+<!-- ══════════════ MOBILE BOTTOM NAV ══════════════ -->
+<nav class="bottom-nav" aria-label="Mobile navigation">
+  <div class="bottom-nav-inner">
+    <button class="bn-item active" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="bni">🏠</span><span>Home</span></button>
+    <button class="bn-item" onclick="document.getElementById('filterBar').scrollIntoView({behavior:'smooth'})"><span class="bni">📚</span><span>Browse</span></button>
+    <button class="bn-item" onclick="openContact()"><span class="bni">💬</span><span>Contact</span></button>
+  </div>
+</nav>
+
+<!-- ══════════════ PDF MODAL — FULLSCREEN CINEMATIC ══════════════ -->
+<div class="modal-overlay" id="pdfOverlay" role="dialog" aria-modal="true" aria-label="PDF Viewer">
+  <div class="pdf-modal">
+    <!-- Accent stripe is ::before pseudo -->
+    <div class="pdf-header">
+      <div class="pdf-header-left">
+        <div class="pdf-modal-title" id="pdfTitle">Loading…</div>
+        <div class="pdf-modal-sub">
+          <span class="pdf-live-dot" id="pdfLiveDot"></span>
+          <span id="pdfSub"></span>
+        </div>
+      </div>
+      <div class="pdf-header-actions">
+        <a id="pdfOpenTab" href="#" target="_blank" rel="noreferrer" class="pdf-action-btn">
+          <span>🗂️ open in Drive</span>
+        </a>
+        <button class="pdf-close-btn" id="pdfClose" aria-label="Close PDF viewer">✕</button>
+      </div>
+    </div>
+
+    <!-- Loading progress bar -->
+    <div class="pdf-progress" id="pdfProgress">
+      <div class="pdf-progress-bar"></div>
+    </div>
+
+    <div class="pdf-iframe-wrap">
+      <div class="pdf-loader" id="pdfLoader">
+        <div class="pdf-spinner-ring"></div>
+        <div class="pdf-loader-text">Loading PDF…</div>
+        <div class="pdf-loader-sub">Connecting to Google Drive</div>
+      </div>
+      <iframe
+        id="pdfIframe"
+        src=""
+        title="PDF Preview"
+        allow="fullscreen"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+      ></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ ABOUT MODAL ══════════════ -->
+<div class="modal-overlay" id="aboutOverlay" role="dialog" aria-modal="true" aria-label="About Us">
+  <div class="info-modal">
+    <div class="info-header">
+      <h2>📖 About Us</h2>
+      <button class="close-btn" id="aboutClose" aria-label="Close">✕</button>
+    </div>
+    <div class="info-body">
+      <p>
+      
+      Welcome to our study platform.<br></br>
+      
+      My name is Soumadeep, and I am a student from KKHS School. This platform was created with a simple goal — to make studying easier, faster, and more organized for students.<br></br>
+      
+      We noticed that many students struggle to find notes, PDFs, and study materials in one clean place. So we built this platform to help students access educational resources in a simple and distraction-free way.<br></br>
+      
+      Our focus is to provide a smooth learning experience with organized materials for different classes and subjects. We are continuously trying to improve the platform and add more useful content for students.<br></br>
+      
+      Thank you so much for visiting and supporting our project. Your support motivates us to improve and build even better educational tools in the future.</p>
+    </div>
+    <div class="info-footer">
+      <button class="btn btn-primary" onclick="closeModal('aboutOverlay')" style="flex:none;width:100%">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ PRIVACY MODAL ══════════════ -->
+<div class="modal-overlay" id="privacyOverlay" role="dialog" aria-modal="true" aria-label="Privacy Polacy">
+  <div class="info-modal">
+    <div class="info-header">
+      <h2>🔒 Privacy Policy</h2>
+      <button class="close-btn" id="privacyClose" aria-label="Close">✕</button>
+    </div>
+    <div class="info-body">
+      <p>
+      This website is created for educational purposes only.<br>
+      
+      1. No Login Required  
+      Users can access all content without creating an account or logging in.<br></br>
+      
+      2. No Personal Data Collection  
+      We do not collect any sensitive personal information such as passwords, private messages, or financial details.<br></br>
+      
+      3. Firebase Usage  
+      We use Firebase only to store and display educational materials like notes and PDFs. This helps us organize and deliver content smoothly.<br></br>
+      
+      4. External Links (Google Drive)  
+      Some materials may open through Google Drive or other external links. Once you leave our website, the external platform’s privacy policy will apply. We are not responsible for those third-party services.<br></br>
+      
+      5. No Data Selling  
+      We do not sell, share, or trade any user data with any third party.<br></br>
+      
+      6. Educational Use Only  
+      All content is provided strictly for learning and educational purposes.<br></br>
+      
+      7. Updates  
+      This privacy policy may be updated in the future if needed.<br></br>
+      
+      By using this website, you agree to this policy.</p></br>
+    </div>
+    <div class="info-footer">
+      <button class="btn btn-primary" onclick="closeModal('privacyOverlay')" style="flex:none;width:100%">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ TOAST ══════════════ -->
+<div class="toast-container" id="toastContainer" aria-live="assertive"></div>
+
+<!-- ══════════════════════════════════════════════════════
+     FIREBASE + APPLICATION LOGIC
+══════════════════════════════════════════════════════ -->
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-app.js";
+  import {
+    getFirestore, collection, query, orderBy, onSnapshot
+  } from "https://www.gstatic.com/firebasejs/11.8.1/firebase-firestore.js";
+
+  /* ──────────────────────────────────────────────
+     FIREBASE CONFIG  ← replace with your values
+  ────────────────────────────────────────────── */
+  const firebaseConfig = {
+  apiKey: "AIzaSyBLAeDljS71pVWHXU1rXkMBj16gvNmpgJ8",
+  authDomain: "studyportal-f57e2.firebaseapp.com",
+  databaseURL: "https://studyportal-f57e2-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "studyportal-f57e2",
+  storageBucket: "studyportal-f57e2.firebasestorage.app",
+  messagingSenderId: "453072269134",
+  appId: "1:453072269134:web:3408af690bafb8c53e381f",
+  measurementId: "G-S1RTY1Z4E2"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db  = getFirestore(app);
+
+  /* ──────────────────────────────────────────────
+     STATE
+  ────────────────────────────────────────────── */
+  let allMaterials   = [];
+  let renderedIds    = new Set();
+  let isFirstLoad    = true;
+  let searchTerm     = "";
+  let filterCat      = "";
+  let filterClass    = "";
+  let filterSub      = "";
+  let searchTimer    = null;
+
+  /* ──────────────────────────────────────────────
+     UTIL: HTML escape
+  ────────────────────────────────────────────── */
+  const esc = s => !s ? "" : String(s)
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;").replace(/'/g,"&#39;");
+
+  /* ──────────────────────────────────────────────
+     UTIL: Build Google Drive preview URL
+  ────────────────────────────────────────────── */
+  function drivePreview(link) {
+    if (!link) return "";
+    // format: /file/d/FILE_ID/...
+    const m1 = link.match(/\/file\/d\/([^/?&#]+)/);
+    if (m1) return `https://drive.google.com/file/d/${m1[1]}/preview`;
+    // format: ?id=FILE_ID or &id=FILE_ID
+    const m2 = link.match(/[?&]id=([^&]+)/);
+    if (m2) return `https://drive.google.com/file/d/${m2[1]}/preview`;
+    return link;
+  }
+
+  /* ──────────────────────────────────────────────
+     UTIL: Normalize thumbnail URL
+     Supports: normal URLs, Google Drive, Canva public
+  ────────────────────────────────────────────── */
+  function normalizeThumbnail(url) {
+    if (!url) return null;
+    const u = url.trim();
+    if (!u) return null;
+
+    // Google Drive file link → thumbnail proxy
+    const gDriveFile = u.match(/\/file\/d\/([^/?&#]+)/);
+    if (gDriveFile) {
+      return `https://drive.google.com/thumbnail?id=${gDriveFile[1]}&sz=w600`;
+    }
+    const gDriveId = u.match(/[?&]id=([^&]+)/);
+    if (gDriveId && u.includes("drive.google.com")) {
+      return `https://drive.google.com/thumbnail?id=${gDriveId[1]}&sz=w600`;
+    }
+
+    // Google Drive open link: drive.google.com/open?id=...
+    const gOpen = u.match(/drive\.google\.com\/open\?id=([^&]+)/);
+    if (gOpen) return `https://drive.google.com/thumbnail?id=${gOpen[1]}&sz=w600`;
+
+    // Canva share/design links — try direct, fallback to placeholder
+    // Canva images can't be proxied; just return url and let img error fire
+    if (u.includes("canva.com")) return u;
+
+    // Otherwise: regular URL (CDN, direct image, etc.)
+    return u;
+  }
+
+  /* ──────────────────────────────────────────────
+     UTIL: Category → icon mapping
+  ────────────────────────────────────────────── */
+  const catIcon = c => ({
+    "Notes":"📝", "Question Paper":"📋", "Sample Paper":"📄",
+    "Worksheet":"✏️", "Textbook":"📖", "Guide":"🗺️",
+    "MCQ":"✅", "Other":"📁"
+  }[c] || "📄");
+
+  /* ──────────────────────────────────────────────
+     THEME
+  ────────────────────────────────────────────── */
+  const themeBtn   = document.getElementById("themeBtn");
+  const savedTheme = localStorage.getItem("sh-theme") || "dark";
+  document.body.setAttribute("data-theme", savedTheme);
+  themeBtn.textContent = savedTheme === "dark" ? "☀️" : "🌙";
+
+  themeBtn.addEventListener("click", () => {
+    const next = document.body.getAttribute("data-theme") === "dark" ? "light" : "dark";
+    document.body.setAttribute("data-theme", next);
+    themeBtn.textContent = next === "dark" ? "☀️" : "🌙";
+    localStorage.setItem("sh-theme", next);
+  });
+
+  /* ──────────────────────────────────────────────
+     TOAST
+  ────────────────────────────────────────────── */
+  function toast(msg, type = "info") {
+    const tc = document.getElementById("toastContainer");
+    const icons = { success:"✅", error:"❌", info:"ℹ️" };
+    const el = document.createElement("div");
+    el.className = `toast ${type}`;
+    el.innerHTML = `<span>${icons[type]||"ℹ️"}</span><span>${msg}</span>`;
+    tc.appendChild(el);
+    setTimeout(() => {
+      el.classList.add("fade-out");
+      setTimeout(() => el.remove(), 300);
+    }, 3400);
+  }
+
+  /* ──────────────────────────────────────────────
+     RIPPLE
+  ────────────────────────────────────────────── */
+  function addRipple(btn) {
+    btn.addEventListener("click", function(e) {
+      const r = document.createElement("span");
+      r.className = "ripple";
+      const rect = this.getBoundingClientRect();
+      const s = Math.max(rect.width, rect.height);
+      r.style.cssText = `width:${s}px;height:${s}px;left:${e.clientX-rect.left-s/2}px;top:${e.clientY-rect.top-s/2}px`;
+      this.appendChild(r);
+      setTimeout(() => r.remove(), 600);
+    });
+  }
+
+  /* ──────────────────────────────────────────────
+     MODALS
+  ────────────────────────────────────────────── */
+  window.closeModal = id => {
+    document.getElementById(id).classList.remove("open");
+    document.body.style.overflow = "";
+  };
+  function openModal(id) {
+    document.getElementById(id).classList.add("open");
+    document.body.style.overflow = "hidden";
+  }
+
+  ["aboutOverlay","privacyOverlay","pdfOverlay"].forEach(id => {
+    document.getElementById(id).addEventListener("click", e => {
+      if (e.target.id === id) window.closeModal(id);
+    });
+  });
+
+  document.addEventListener("keydown", e => {
+    if (e.key !== "Escape") return;
+    ["pdfOverlay","aboutOverlay","privacyOverlay"].forEach(id => {
+      if (document.getElementById(id).classList.contains("open")) {
+        window.closeModal(id);
+        if (id === "pdfOverlay") {
+          setTimeout(() => { document.getElementById("pdfIframe").src = ""; }, 300);
+        }
+      }
+    });
+  });
+
+  ["navAbout","footerAbout","bnAbout"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", () => openModal("aboutOverlay"));
+  });
+  document.getElementById("aboutClose").addEventListener("click", () => closeModal("aboutOverlay"));
+  ["navPrivacy","footerPrivacy"].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.addEventListener("click", () => openModal("privacyOverlay"));
+  });
+  document.getElementById("privacyClose").addEventListener("click", () => closeModal("privacyOverlay"));
+
+  window.openContact = () => window.open("https://ig.me/m/soumadeep7880", "_blank", "noreferrer");
+
+  /* ──────────────────────────────────────────────
+     PDF MODAL — cinematic open/close
+  ────────────────────────────────────────────── */
+  function openPdf(link, previewUrl, title, sub) {
+    document.getElementById("pdfTitle").textContent = title || "PDF Preview";
+    document.getElementById("pdfSub").textContent   = sub || "Google Drive";
+    document.getElementById("pdfOpenTab").href      = link;
+
+    const iframe    = document.getElementById("pdfIframe");
+    const loader    = document.getElementById("pdfLoader");
+    const progress  = document.getElementById("pdfProgress");
+
+    // Reset state
+    loader.classList.remove("hidden");
+    progress.classList.remove("done");
+    iframe.src = "";
+
+    openModal("pdfOverlay");
+
+    // Slight delay so modal animation plays first
+    setTimeout(() => {
+      iframe.src = previewUrl || link;
+      iframe.onload = () => {
+        loader.classList.add("hidden");
+        progress.classList.add("done");
+      };
+    }, 120);
+  }
+
+  document.getElementById("pdfClose").addEventListener("click", () => {
+    closeModal("pdfOverlay");
+    setTimeout(() => {
+      document.getElementById("pdfIframe").src = "";
+      document.getElementById("pdfProgress").classList.remove("done");
+    }, 320);
+  });
+
+  /* ──────────────────────────────────────────────
+     STATS BAR
+  ────────────────────────────────────────────── */
+  function updateStats(list) {
+    document.getElementById("statTotal").textContent    = list.length;
+    document.getElementById("statSubjects").textContent = new Set(list.map(m=>m.subject).filter(Boolean)).size;
+    document.getElementById("statClasses").textContent  = new Set(list.map(m=>m.class).filter(Boolean)).size;
+    document.getElementById("statCats").textContent     = new Set(list.map(m=>m.category).filter(Boolean)).size;
+  }
+
+  /* ──────────────────────────────────────────────
+     SUBJECT DROPDOWN — built from live data
+  ────────────────────────────────────────────── */
+  function buildSubjectDropdown(list) {
+    const sel = document.getElementById("selSub");
+    const cur = sel.value;
+    const subs = ["", ...Array.from(new Set(list.map(m=>m.subject).filter(Boolean))).sort()];
+    sel.innerHTML = subs.map(s => `<option value="${esc(s)}">${s||"All"}</option>`).join("");
+    if (subs.includes(cur)) sel.value = cur;
+  }
+
+  /* ──────────────────────────────────────────────
+     FILTER CHIPS + RESET VISIBILITY
+  ────────────────────────────────────────────── */
+  function syncFilterUI() {
+    const row2     = document.getElementById("filterRow2");
+    const resetBtn = document.getElementById("resetFilters");
+    row2.querySelectorAll(".active-chip").forEach(c => c.remove());
+
+    const resultInfo = document.getElementById("resultInfo");
+    const actions = [
+      { val: filterCat,   label: filterCat,             clear: () => { filterCat="";   document.getElementById("selCat").value="";   document.getElementById("wrapCat").classList.remove("active-filter");   applyFilters(); } },
+      { val: filterClass, label: filterClass,             clear: () => { filterClass=""; document.getElementById("selClass").value=""; document.getElementById("wrapClass").classList.remove("active-filter"); applyFilters(); } },
+      { val: filterSub,   label: filterSub,              clear: () => { filterSub="";   document.getElementById("selSub").value="";   document.getElementById("wrapSub").classList.remove("active-filter");   applyFilters(); } },
+      { val: searchTerm,  label: `"${searchTerm}"`,      clear: () => { searchTerm="";  document.getElementById("searchInput").value=""; document.getElementById("searchClear").style.display="none"; applyFilters(); } },
+    ];
+
+    actions.filter(a => a.val).forEach(a => {
+      const chip = document.createElement("span");
+      chip.className = "active-chip";
+      chip.innerHTML = `${esc(a.label)}<button title="Remove filter">✕</button>`;
+      chip.querySelector("button").addEventListener("click", a.clear);
+      row2.insertBefore(chip, resultInfo);
+    });
+
+    const hasAny = filterCat || filterClass || filterSub || searchTerm;
+    row2.classList.toggle("empty", !hasAny);
+    resetBtn.classList.toggle("visible", !!hasAny);
+
+    document.getElementById("wrapCat").classList.toggle("active-filter",   !!filterCat);
+    document.getElementById("wrapClass").classList.toggle("active-filter", !!filterClass);
+    document.getElementById("wrapSub").classList.toggle("active-filter",   !!filterSub);
+  }
+
+  /* ──────────────────────────────────────────────
+     FILTER — purely in-memory, zero Firestore calls
+  ────────────────────────────────────────────── */
+  function getFiltered() {
+    const lq = searchTerm.toLowerCase();
+    return allMaterials.filter(m => {
+      if (filterCat   && m.category !== filterCat)  return false;
+      if (filterClass && m.class    !== filterClass) return false;
+      if (filterSub   && m.subject  !== filterSub)  return false;
+      if (lq && !([m.title, m.subject, m.category, m.class]
+        .some(v => (v||"").toLowerCase().includes(lq)))) return false;
+      return true;
+    });
+  }
+
+  /* ──────────────────────────────────────────────
+     APPLY FILTERS — smooth fade transition
+  ────────────────────────────────────────────── */
+  function applyFilters() {
+    syncFilterUI();
+    const grid      = document.getElementById("cardsGrid");
+    const filtered  = getFiltered();
+    const fIds      = new Set(filtered.map(m => m.id));
+
+    document.getElementById("resultInfo").innerHTML =
+      `<strong>${filtered.length}</strong> result${filtered.length !== 1 ? "s" : ""}`;
+
+    // Fast opacity fade, then show/hide
+    grid.style.transition = "opacity 0.12s ease";
+    grid.style.opacity    = "0";
+
+    setTimeout(() => {
+      grid.querySelectorAll(".material-card[data-id]").forEach(card => {
+        card.style.display = fIds.has(card.dataset.id) ? "" : "none";
+      });
+
+      let emptyEl = grid.querySelector(".empty-state");
+      if (!filtered.length) {
+        if (!emptyEl) {
+          emptyEl = document.createElement("div");
+          emptyEl.className = "empty-state";
+          emptyEl.innerHTML = `
+            <div class="empty-bowl">🔍</div>
+            <h3>No materials found</h3>
+            <p>Try different filters or a different search term.</p>`;
+          grid.appendChild(emptyEl);
+        }
+        emptyEl.style.display = "flex";
+      } else if (emptyEl) {
+        emptyEl.style.display = "none";
+      }
+
+      grid.style.transition = "opacity 0.18s ease";
+      grid.style.opacity    = "1";
+    }, 120);
+  }
+
+  /* ──────────────────────────────────────────────
+     SMART DOM DIFF — add new cards, remove gone
+     Existing cards never touched (zero flicker)
+  ────────────────────────────────────────────── */
+  function diffRender(materials) {
+    const grid = document.getElementById("cardsGrid");
+
+    // Remove skeleton on first paint
+    const sk = document.getElementById("skeletonGrid");
+    if (sk) sk.remove();
+
+    const incomingIds = new Set(materials.map(m => m.id));
+
+    // Remove cards deleted from Firestore
+    renderedIds.forEach(id => {
+      if (!incomingIds.has(id)) {
+        const el = grid.querySelector(`.material-card[data-id="${CSS.escape(id)}"]`);
+        if (el) el.remove();
+        renderedIds.delete(id);
+      }
+    });
+
+    const fIds = new Set(getFiltered().map(m => m.id));
+
+    // Insert new cards in correct order
+    materials.forEach((m, i) => {
+      if (renderedIds.has(m.id)) return;
+
+      const card = buildCard(m, isFirstLoad ? i : 0);
+      card.style.display = fIds.has(m.id) ? "" : "none";
+
+      // Insert before the first card whose Firestore position is later
+      const allCards = [...grid.querySelectorAll(".material-card[data-id]")];
+      const ref = allCards.find(c => {
+        const ci = materials.findIndex(mm => mm.id === c.dataset.id);
+        return ci > i;
+      });
+      if (ref) grid.insertBefore(card, ref);
+      else      grid.appendChild(card);
+
+      renderedIds.add(m.id);
+    });
+
+    // Update result info
+    const filtered = getFiltered();
+    document.getElementById("resultInfo").innerHTML =
+      `<strong>${filtered.length}</strong> result${filtered.length !== 1 ? "s" : ""}`;
+
+    // Empty state
+    let emptyEl = grid.querySelector(".empty-state");
+    if (!filtered.length && !emptyEl) {
+      emptyEl = document.createElement("div");
+      emptyEl.className = "empty-state";
+      emptyEl.innerHTML = `
+        <div class="empty-bowl">📭</div>
+        <h3>No materials yet</h3>
+        <p>Materials will appear here once the admin uploads them.</p>`;
+      grid.appendChild(emptyEl);
+    } else if (filtered.length && emptyEl) {
+      emptyEl.remove();
+    }
+  }
+
+  /* ──────────────────────────────────────────────
+     BUILD SINGLE CARD
+  ────────────────────────────────────────────── */
+  function buildCard(m, delay = 0) {
+    const card = document.createElement("div");
+    card.className   = "material-card card-enter";
+    card.dataset.id  = m.id;
+    card.setAttribute("role", "listitem");
+    card.style.animationDelay = `${Math.min(delay * 0.05, 0.38)}s`;
+    card.addEventListener("animationend", () => card.classList.remove("card-enter"), { once: true });
+
+    const previewUrl = drivePreview(m.driveLink);
+    const subLine    = [m.class, m.subject].filter(Boolean).join(" · ");
+    const icon       = catIcon(m.category);
+    const thumbUrl   = normalizeThumbnail(m.thumbnail);
+
+    // Build thumbnail HTML
+    let thumbHTML;
+    if (thumbUrl) {
+      thumbHTML = `
+        <img
+          src="${esc(thumbUrl)}"
+          alt="${esc(m.title)}"
+          loading="lazy"
+          onerror="
+            this.style.display='none';
+            this.parentElement.querySelector('.thumb-ph').style.display='flex';
+          "
+        />
+        <div class="thumb-ph" style="display:none">
+          <div class="thumb-ph-bg"></div>
+          <div class="thumb-ph-grid"></div>
+          <div class="thumb-ph-icon">${icon}</div>
+          <div class="thumb-ph-label">${esc(m.category || "PDF")}</div>
+        </div>
+        <div class="thumb-stripe"></div>
+        <div class="card-overlay"></div>`;
+    } else {
+      thumbHTML = `
+        <div class="thumb-ph">
+          <div class="thumb-ph-bg"></div>
+          <div class="thumb-ph-grid"></div>
+          <div class="thumb-ph-icon">${icon}</div>
+          <div class="thumb-ph-label">${esc(m.category || "PDF")}</div>
+        </div>
+        <div class="thumb-stripe"></div>
+        <div class="card-overlay"></div>`;
+    }
+
+    card.innerHTML = `
+      <div class="card-thumb">${thumbHTML}</div>
+      <div class="card-body">
+        <div class="card-tags">
+          ${m.category ? `<span class="badge badge-cat">${esc(m.category)}</span>`  : ""}
+          ${m.class    ? `<span class="badge badge-class">${esc(m.class)}</span>`   : ""}
+          ${m.subject  ? `<span class="badge badge-sub">${esc(m.subject)}</span>`   : ""}
+        </div>
+        <div class="card-title">${esc(m.title)}</div>
+        <div class="card-footer">
+          <button class="btn btn-primary view-btn"
+            data-link="${esc(m.driveLink)}"
+            data-preview="${esc(previewUrl)}"
+            data-title="${esc(m.title)}"
+            data-sub="${esc(subLine)}">
+            📄 View PDF
+          </button>
+          
+          </a>
+        </div>
+      </div>`;
+
+    // Lazy image fade-in after load
+    const img = card.querySelector(".card-thumb img");
+    if (img) {
+      img.addEventListener("load", () => img.classList.add("loaded"), { once: true });
+      // If cached and already complete
+      if (img.complete && img.naturalWidth) img.classList.add("loaded");
+    }
+
+    // View PDF button (opens modal, no redirect)
+    const viewBtn = card.querySelector(".view-btn");
+    addRipple(viewBtn);
+    viewBtn.addEventListener("click", () => {
+      openPdf(viewBtn.dataset.link, viewBtn.dataset.preview, viewBtn.dataset.title, viewBtn.dataset.sub);
+    });
+
+    return card;
+  }
+
+  /* ──────────────────────────────────────────────
+     FILTER CONTROLS
+  ────────────────────────────────────────────── */
+  const searchInput = document.getElementById("searchInput");
+  const searchClear = document.getElementById("searchClear");
+
+  searchInput.addEventListener("input", () => {
+    clearTimeout(searchTimer);
+    searchClear.style.display = searchInput.value ? "flex" : "none";
+    searchTimer = setTimeout(() => {
+      searchTerm = searchInput.value.trim();
+      applyFilters();
+    }, 320);
+  });
+
+  searchClear.addEventListener("click", () => {
+    searchInput.value = "";
+    searchTerm = "";
+    searchClear.style.display = "none";
+    searchInput.focus();
+    applyFilters();
+  });
+
+  document.getElementById("selCat").addEventListener("change",   e => { filterCat   = e.target.value; applyFilters(); });
+  document.getElementById("selClass").addEventListener("change", e => { filterClass = e.target.value; applyFilters(); });
+  document.getElementById("selSub").addEventListener("change",   e => { filterSub   = e.target.value; applyFilters(); });
+
+  document.getElementById("resetFilters").addEventListener("click", () => {
+    searchInput.value = "";
+    searchTerm = filterCat = filterClass = filterSub = "";
+    searchClear.style.display = "none";
+    ["selCat","selClass","selSub"].forEach(id => { document.getElementById(id).value = ""; });
+    applyFilters();
+  });
+
+  document.getElementById("navRefresh").addEventListener("click", () => {
+    applyFilters();
+    toast("View refreshed!", "success");
+  });
+
+  /* ──────────────────────────────────────────────
+     FIRESTORE REALTIME — single listener, DOM diff
+  ────────────────────────────────────────────── */
+  function startListener() {
+    const q = query(collection(db, "materials"), orderBy("uploadedAt", "desc"));
+
+    onSnapshot(q, snap => {
+      const incoming = snap.docs.map(d => ({ id: d.id, ...d.data() }));
+      const wasFirst = isFirstLoad;
+
+      allMaterials = incoming;
+      buildSubjectDropdown(allMaterials);
+      updateStats(allMaterials);
+      diffRender(allMaterials);
+
+      if (!wasFirst) {
+        // Background update — silently re-apply current filters
+        applyFilters();
+      }
+
+      isFirstLoad = false;
+
+    }, err => {
+      const sk = document.getElementById("skeletonGrid");
+      if (sk) sk.remove();
+      const grid = document.getElementById("cardsGrid");
+      if (!grid.querySelector(".material-card")) {
+        grid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-bowl">⚠️</div>
+            <h3>Connection Error</h3>
+            <p>${esc(err.message)}</p>
+          </div>`;
+      }
+      toast("Could not connect to Firebase. Check your config.", "error");
+    });
+  }
+
+  startListener();
+</script>
+</body>
+</html>
+ Firebase. Check your config.", "error");
+    });
+  }
+
+  startListener();
+</script>
+</body>
+</html>
